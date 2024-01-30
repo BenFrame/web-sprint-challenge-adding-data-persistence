@@ -7,7 +7,8 @@ router.get('/', (req, res, next) => {
     helpers.getTasks()
     .then(tasks => {
         console.log(tasks)
-        res.json(tasks)
+        const cleanedTasks = tasks.map(task => helpers.convertTaskBoolean(task))
+        res.json(cleanedTasks)
         
     })
     .catch(next)
@@ -16,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     helpers.postTask(req.body)
         .then(task => {
-            res.json(task)
+            res.json(helpers.convertTaskBoolean(task))
         })
         .catch(next)
 })

@@ -2,7 +2,6 @@
 const db = require('../../data/dbConfig')
 
 function getTasks(){
-    
     return db('tasks')
 }
 
@@ -11,7 +10,12 @@ async function postTask(task){
     return getTasks().where({task_id}).first()
 }
 
+function convertTaskBoolean(task){
+    return { ...task, task_completed: task.task_completed ? true : false }
+}
+
 module.exports = {
     getTasks,
-    postTask
+    postTask,
+    convertTaskBoolean
 }

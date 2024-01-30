@@ -10,7 +10,12 @@ async function postProject(project){
     return getProjects().where({project_id}).first()
 }
 
+function convertProjectBoolean(project){
+    return { ...project, project_completed: project.project_completed ? true : false }
+}
+
 module.exports = {
     getProjects,
     postProject,
+    convertProjectBoolean
 }

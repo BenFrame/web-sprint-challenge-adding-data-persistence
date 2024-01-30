@@ -7,7 +7,8 @@ router.get('/', (req, res, next) => {
     helpers.getProjects()
     .then(projects => {
         console.log(projects)
-        res.json(projects)
+        const cleanedProjects = projects.map( project => helpers.convertProjectBoolean(project))
+        res.json(cleanedProjects)
         
     })
     .catch(next)
@@ -16,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
     helpers.postProject(req.body)
         .then(project => {
-            res.json(project)
+            res.json(helpers.convertProjectBoolean(project))
         })
         .catch(next)
 })
