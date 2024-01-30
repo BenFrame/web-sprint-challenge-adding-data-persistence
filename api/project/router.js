@@ -13,5 +13,13 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
+router.post('/', (req, res, next) => {
+    helpers.postProject(req.body)
+        .then(project => {
+            res.json(project)
+        })
+        .catch(next)
+})
+
 
 module.exports = router
