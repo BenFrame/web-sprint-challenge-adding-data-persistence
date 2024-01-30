@@ -1,11 +1,14 @@
 // build your `/api/projects` router here
 const router = require('express').Router()
-const projects = require('./model')
+const helpers = require('./model.js')
 
 router.get('/', (req, res, next) => {
-    projects.find()
+    
+    helpers.getProjects()
     .then(projects => {
+        console.log(projects)
         res.json(projects)
+        
     })
     .catch(next)
 })
